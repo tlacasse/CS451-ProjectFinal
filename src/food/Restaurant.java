@@ -1,11 +1,27 @@
 package food;
 
-public final class Restaurant {
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-	public static void main(String[] args) {
+import food.cooking.Bacon;
+
+public final class Restaurant implements AutoCloseable {
+
+	private final ScheduledExecutorService cooking;
+
+	public Restaurant() {
+		cooking = Executors.newScheduledThreadPool(8);
+		cooking.scheduleAtFixedRate(new Bacon(), 0, 1, TimeUnit.SECONDS);
 	}
 
-	private Restaurant() {
+	@Override
+	public void close() throws Exception {
+		cooking.shutdown();
+	}
+
+	public boolean isClosed() {
+		return cooking.isTerminated();
 	}
 
 }
