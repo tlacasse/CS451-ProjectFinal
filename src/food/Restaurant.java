@@ -1,27 +1,57 @@
 package food;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
-import food.cooking.Bacon;
+import food.agents.SocketSide;
 
-public final class Restaurant implements AutoCloseable {
+public class Restaurant implements AutoCloseable {
 
-	private final ScheduledExecutorService cooking;
+	private final ServerSocket server;
 
-	public Restaurant() {
-		cooking = Executors.newScheduledThreadPool(8);
-		cooking.scheduleAtFixedRate(new Bacon(), 0, 1, TimeUnit.SECONDS);
+	private final List<Client> clients;
+
+	public Restaurant(int port) throws IOException {
+		server = new ServerSocket(port);
+		clients = new LinkedList<>();
+	}
+
+	public void start() throws IOException {
+		Client c = new Client();
+		clients.add(c);
+		try (Scanner scan = new Scanner(System.in)) {
+			scan.nextLine();
+			c.writeByte((byte) 0);
+			c.flush();
+		}
 	}
 
 	@Override
-	public void close() throws Exception {
-		cooking.shutdown();
+	public void close() throws IOException {
+		for (Client client : clients) {
+			client.close();
+		}
+		server.close();
 	}
 
-	public boolean isClosed() {
-		return cooking.isTerminated();
+	/////////////////////////////////////////////////////////////////////////
+
+	private class Client extends SocketSide {
+
+		public Client() throws IOException {
+			super();
+		}
+
+		@Override
+		protected void connect(int port) throws IOException {
+			if (socket == null || socket.isClosed()) {
+				socket = server.accept();
+			}
+		}
+
 	}
 
 }
