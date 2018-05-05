@@ -18,7 +18,7 @@ public final class Program {
 		try (Scanner scan = new Scanner(System.in)) {
 			final Config config = Config.create(scan, CONFIG_KEYS);
 			final ExecutorService thread = Executors.newSingleThreadExecutor();
-			try (Restaurant restaurant = new Restaurant(PORT); Kitchen kitchen = new Kitchen(PORT,config)) {
+			try (Restaurant restaurant = new Restaurant(PORT); Kitchen kitchen = new Kitchen(PORT, config)) {
 				thread.execute(kitchen);
 				restaurant.start();
 			} finally {
@@ -27,12 +27,14 @@ public final class Program {
 		}
 	}
 
-	public static final Key COUNT_CHEFS;
+	public static final Key COUNT_CHEFS, COUNT_OVENS, COUNT_PANS;
 	public static final List<Key> CONFIG_KEYS;
 
 	static {
 		CONFIG_KEYS = new LinkedList<>();
 		CONFIG_KEYS.add(COUNT_CHEFS = new Key("Number of Chefs", 10));
+		CONFIG_KEYS.add(COUNT_OVENS = new Key("Number of Ovens", 2));
+		CONFIG_KEYS.add(COUNT_PANS = new Key("Number of Pans", 4));
 	}
 
 	public static void join(Thread t) {
