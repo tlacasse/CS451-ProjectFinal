@@ -5,6 +5,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import food.Program;
+
 public class Bacon implements Runnable {
 
 	private Future<Food> future;
@@ -15,7 +17,7 @@ public class Bacon implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("Bacon Placed on Pan: " + this);
+		Program.print(this, "Bacon Placed on Pan");
 		try {
 			future.get();
 		} catch (InterruptedException | ExecutionException e) {

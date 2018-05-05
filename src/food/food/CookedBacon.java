@@ -2,6 +2,8 @@ package food.food;
 
 import java.util.concurrent.Callable;
 
+import food.Program;
+
 public class CookedBacon implements Callable<Food>, Food {
 
 	private Bacon bacon;
@@ -12,7 +14,7 @@ public class CookedBacon implements Callable<Food>, Food {
 
 	@Override
 	public CookedBacon call() throws Exception {
-		System.out.println("Bacon Cooked: " + bacon);
+		Program.print(this, "Bacon Cooked: " + bacon);
 		return this;
 	}
 
