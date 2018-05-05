@@ -21,7 +21,7 @@ public class Restaurant implements AutoCloseable {
 	}
 
 	@Override
-	public void close() throws Exception {
+	public void close() {
 		for (ExecutorService pool : pools) {
 			pool.shutdown();
 		}
