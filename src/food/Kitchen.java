@@ -1,5 +1,7 @@
 package food;
 
+import static food.Program.COUNT_CHEFS;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -15,12 +17,14 @@ public final class Kitchen extends SocketSide implements Runnable, AutoCloseable
 	private final ScheduledExecutorService cooking;
 	private final ExecutorService chefs;
 	private final List<ExecutorService> pools;
+	private final Config config;
 
-	public Kitchen(int port) throws IOException {
+	public Kitchen(int port, Config config) throws IOException {
 		super(port);
+		this.config = config;
 		pools = new LinkedList<>();
 		pools.add(cooking = Executors.newScheduledThreadPool(8));
-		pools.add(chefs = Executors.newFixedThreadPool(10));
+		pools.add(chefs = Executors.newFixedThreadPool(config.get(COUNT_CHEFS)));
 	}
 
 	@Override
