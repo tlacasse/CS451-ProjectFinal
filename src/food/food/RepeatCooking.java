@@ -2,7 +2,9 @@ package food.food;
 
 import food.Entity;
 import food.Restaurant;
+import food.food.desc.Cookable;
 
+//fix to allow not just oven
 public class RepeatCooking extends Entity implements Runnable {
 
 	private final Class<? extends Cookable> example;

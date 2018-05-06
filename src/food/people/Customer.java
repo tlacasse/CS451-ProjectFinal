@@ -7,7 +7,7 @@ import food.Entity;
 import food.Program;
 import food.Restaurant;
 import food.food.Bacon;
-import food.food.Food;
+import food.food.desc.Food;
 
 public class Customer extends Entity implements Runnable {
 
