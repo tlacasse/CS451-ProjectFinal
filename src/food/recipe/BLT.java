@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import food.Restaurant;
 import food.food.Bacon;
+import food.food.Bread;
 import food.food.Lettuce;
 import food.food.Meal;
 import food.food.Tomato;
@@ -23,6 +24,10 @@ public class BLT extends Recipe {
 
 	@Override
 	public Food make() throws InterruptedException, ExecutionException {
+		Future<Food> bread = restaurant
+				.setChefToGetFood(new ChefPrepareFood(new Bread(), "getting bread", "done getting bread", 200, 100));
+		ingredients.add(bread.get());
+
 		Future<Food> bacon = restaurant.setChefToSetFoodToCook(
 				new ChefSetFoodToCook(restaurant, new Bacon(), "putting bacon on pan", "done putting bacon on pan"))
 				.get();
