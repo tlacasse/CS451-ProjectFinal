@@ -6,12 +6,12 @@ import food.Program;
 import food.food.desc.Food;
 import food.food.desc.Preparable;
 
-public abstract class AbstractFood implements Preparable, Food {
+public abstract class AbstractPreparable implements Preparable {
 
 	private final String startMessage, endMessage;
 	private final int minMakeTime, rangeMakeTime;
 
-	public AbstractFood(String startMessage, String endMessage, int minMakeTime, int rangeMakeTime) {
+	public AbstractPreparable(String startMessage, String endMessage, int minMakeTime, int rangeMakeTime) {
 		this.startMessage = startMessage;
 		this.endMessage = endMessage;
 		this.minMakeTime = minMakeTime;
