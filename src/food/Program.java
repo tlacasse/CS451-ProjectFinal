@@ -13,7 +13,7 @@ public final class Program {
 	public static void main(String[] args) throws InterruptedException {
 		try (Scanner scan = new Scanner(System.in); Restaurant restaurant = new Restaurant()) {
 			while (scan.nextLine().equals("")) {
-				restaurant.customers().execute(new Customer());
+				restaurant.addCustomer(new Customer(restaurant));
 			}
 			System.out.println(restaurant + " SHUTDOWN");
 			restaurant.close();

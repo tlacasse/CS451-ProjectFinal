@@ -4,7 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+
+import food.food.Cookable;
+import food.food.Food;
+import food.people.Customer;
 
 public class Restaurant implements AutoCloseable {
 
@@ -18,22 +23,6 @@ public class Restaurant implements AutoCloseable {
 		pools.add(chefs = Executors.newFixedThreadPool(Program.COUNT_CHEFS));
 		pools.add(cooktop = Executors.newScheduledThreadPool(Program.COUNT_PANS));
 		pools.add(ovens = Executors.newScheduledThreadPool(Program.COUNT_OVENS));
-	}
-
-	public ExecutorService customers() {
-		return customers;
-	}
-
-	public ExecutorService chefs() {
-		return chefs;
-	}
-
-	public ScheduledExecutorService cooktop() {
-		return cooktop;
-	}
-
-	public ScheduledExecutorService ovens() {
-		return ovens;
 	}
 
 	@Override
@@ -50,6 +39,14 @@ public class Restaurant implements AutoCloseable {
 			}
 		}
 		return true;
+	}
+
+	public void addCustomer(Customer customer) {
+		customers.execute(customer);
+	}
+
+	public Future<Food> cookOnCooktop(Cookable cookable) {
+		return cooktop.submit(cookable);
 	}
 
 }
