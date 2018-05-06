@@ -23,7 +23,7 @@ public class Customer extends Entity implements Runnable {
 		try {
 			food = future.get();
 		} catch (InterruptedException | ExecutionException e) {
-			System.out.println("Customer failed: " + this);
+			System.out.println("Thread failed: " + this);
 			e.printStackTrace();
 		}
 		Program.print(this, "Got food: " + food);

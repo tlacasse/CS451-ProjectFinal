@@ -8,17 +8,20 @@ import food.Program;
 public abstract class AbstractCookable implements Callable<Food>, Cookable {
 
 	private final String startMessage, endMessage;
+	private final int minCookTime, rangeCookTime;
 
-	public AbstractCookable(String startMessage, String endMessage) {
+	public AbstractCookable(String startMessage, String endMessage, int minCookTime, int rangeCookTime) {
 		this.startMessage = startMessage;
 		this.endMessage = endMessage;
+		this.minCookTime = minCookTime;
+		this.rangeCookTime = rangeCookTime;
 	}
 
 	@Override
 	public Food call() throws InterruptedException {
 		final Random rand = new Random();
 		Program.print(this, startMessage);
-		Thread.sleep(1000 + rand.nextInt(1000)); // cooking
+		Thread.sleep(minCookTime + rand.nextInt(rangeCookTime)); // cooking
 		Program.print(this, endMessage);
 		return this;
 	}

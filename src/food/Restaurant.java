@@ -6,9 +6,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import food.food.Cookable;
 import food.food.Food;
+import food.food.RepeatCooking;
 import food.people.Customer;
 
 public class Restaurant implements AutoCloseable {
@@ -47,6 +49,14 @@ public class Restaurant implements AutoCloseable {
 
 	public Future<Food> cookOnCooktop(Cookable cookable) {
 		return cooktop.submit(cookable);
+	}
+
+	public Future<Food> cookInOven(Cookable cookable) {
+		return ovens.submit(cookable);
+	}
+
+	public void cookInOvenOnRepeat(Class<? extends Cookable> cookable) {
+		ovens.scheduleAtFixedRate(new RepeatCooking(this, cookable), 0, 15, TimeUnit.SECONDS);
 	}
 
 }
