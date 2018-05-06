@@ -8,8 +8,8 @@ import food.food.desc.Preparable;
 
 public abstract class AbstractPreparable implements Preparable {
 
-	private final String startMessage, endMessage;
-	private final int minMakeTime, rangeMakeTime;
+	protected final String startMessage, endMessage;
+	protected final int minMakeTime, rangeMakeTime;
 
 	public AbstractPreparable(String startMessage, String endMessage, int minMakeTime, int rangeMakeTime) {
 		this.startMessage = startMessage;
@@ -20,9 +20,9 @@ public abstract class AbstractPreparable implements Preparable {
 
 	@Override
 	public Food call() throws InterruptedException {
-		final Random rand = new Random();
 		Program.print(this, startMessage);
-		Thread.sleep(minMakeTime + rand.nextInt(rangeMakeTime)); // cooking
+		// waiting -> making the food
+		Thread.sleep(minMakeTime + (new Random()).nextInt(rangeMakeTime));
 		Program.print(this, endMessage);
 		return this;
 	}
