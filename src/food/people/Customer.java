@@ -18,7 +18,7 @@ public class Customer extends Entity implements Runnable {
 	public void run() {
 		Program.print(this, "entered Restaurant");
 		try {
-			Food meal = (new BLT(restaurant)).get();
+			Food meal = (new BLT(restaurant)).make();
 			Program.print(this, "got food: " + meal);
 		} catch (InterruptedException | ExecutionException e) {
 			System.out.println("Customer Failed: " + e);

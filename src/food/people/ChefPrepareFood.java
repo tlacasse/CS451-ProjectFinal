@@ -4,13 +4,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 import food.food.desc.Food;
-import food.food.desc.SimplePreparable;
+import food.food.desc.Preparable;
 
 public class ChefPrepareFood extends AbstractChef implements Callable<Food> {
 
-	private final SimplePreparable food;
+	private final Preparable food;
 
-	public ChefPrepareFood(SimplePreparable food, String startMessage, String endMessage, int minMakeTime,
+	public ChefPrepareFood(Preparable food, String startMessage, String endMessage, int minMakeTime,
 			int rangeMakeTime) {
 		super(startMessage, endMessage, minMakeTime, rangeMakeTime);
 		this.food = food;

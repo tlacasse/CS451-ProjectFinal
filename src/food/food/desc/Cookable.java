@@ -1,6 +1,8 @@
 package food.food.desc;
 
-public interface Cookable extends Preparable {
+import java.util.concurrent.Callable;
+
+public interface Cookable extends Preparable, Callable<Food> {
 
 	public int averageCookingTime();
 
