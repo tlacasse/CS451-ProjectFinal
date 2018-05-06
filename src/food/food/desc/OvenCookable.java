@@ -1,5 +1,5 @@
 package food.food.desc;
 
-public interface OvenCookable extends Cookable {
+public interface OvenCookable extends Preparable {
 
 }

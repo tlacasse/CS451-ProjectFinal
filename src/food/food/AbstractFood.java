@@ -1,12 +1,12 @@
 package food.food;
 
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 import food.Program;
 import food.food.desc.Food;
+import food.food.desc.Preparable;
 
-public abstract class AbstractFood implements Callable<Food>, Food {
+public abstract class AbstractFood implements Preparable, Food {
 
 	private final String startMessage, endMessage;
 	private final int minMakeTime, rangeMakeTime;
