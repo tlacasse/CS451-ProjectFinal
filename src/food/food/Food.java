@@ -1,5 +1,7 @@
 package food.food;
 
-public interface Food {
+import java.util.concurrent.Callable;
+
+public interface Food extends Callable<Food> {
 
 }
