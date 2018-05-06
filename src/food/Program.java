@@ -2,7 +2,6 @@ package food;
 
 import java.util.Scanner;
 
-import food.food.Bread;
 import food.people.Customer;
 
 public final class Program {
@@ -13,7 +12,6 @@ public final class Program {
 
 	public static void main(String[] args) throws InterruptedException {
 		try (Scanner scan = new Scanner(System.in); Restaurant restaurant = new Restaurant()) {
-			restaurant.cookInOvenOnRepeat(Bread.class);
 			while (scan.nextLine().equals("")) {
 				restaurant.addCustomer(new Customer(restaurant));
 			}
@@ -28,7 +26,7 @@ public final class Program {
 
 	public static void print(Object o, String m) {
 		System.out.println(
-				(o.toString() + "                                                      ").substring(0, 35) + m);
+				(o.toString() + "                                                      ").substring(0, 45) + m);
 	}
 
 	private Program() {

@@ -1,13 +1,12 @@
 package food.people;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import food.Entity;
 import food.Program;
 import food.Restaurant;
-import food.food.Bacon;
 import food.food.desc.Food;
+import food.recipe.BLT;
 
 public class Customer extends Entity implements Runnable {
 
@@ -17,16 +16,15 @@ public class Customer extends Entity implements Runnable {
 
 	@Override
 	public void run() {
-		Program.print(this, "Entered Restaurant");
-		Future<Food> future = restaurant.cookOnCooktop(new Bacon());
-		Food food = null;
+		Program.print(this, "entered Restaurant");
 		try {
-			food = future.get();
+			Food meal = (new BLT(restaurant)).get();
+			Program.print(this, "got food: " + meal);
 		} catch (InterruptedException | ExecutionException e) {
-			System.out.println("Thread failed: " + this);
+			System.out.println("Customer Failed: " + e);
 			e.printStackTrace();
 		}
-		Program.print(this, "Got food: " + food);
+
 	}
 
 }

@@ -1,11 +1,13 @@
 package food.food;
 
-import food.food.desc.CooktopCookable;
+import food.food.desc.Cookable;
 
-public class Bacon extends AbstractCookable implements CooktopCookable {
+public class Bacon extends AbstractCookable implements Cookable {
 
 	public Bacon() {
-		super("Bacon placed on pan", "Bacon is done cooking", 2000, 1000);
+		super("bacon placed on pan", "bacon is done cooking", 5000, 2000);
 	}
+
+	public static final int AVERAGE_COOKING_TIME = (new Bacon()).averageCookingTime();
 
 }
