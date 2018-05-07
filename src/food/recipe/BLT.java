@@ -13,8 +13,6 @@ import food.food.Tomato;
 import food.food.desc.Food;
 import food.people.ChefCheckingStatus;
 import food.people.ChefGetCookedFood;
-import food.people.ChefPrepareFood;
-import food.people.ChefSetFoodToCook;
 
 public class BLT extends Recipe {
 
@@ -24,13 +22,10 @@ public class BLT extends Recipe {
 
 	@Override
 	public Food make() throws InterruptedException, ExecutionException {
-		Future<Food> bread = restaurant
-				.setChefToGetFood(new ChefPrepareFood(new Bread(), "getting bread", "done getting bread", 200, 100));
+		Future<Food> bread = restaurant.setChefToGetFood((new Bread()).getChefToPrepare());
 		ingredients.add(bread.get());
 
-		Future<Food> bacon = restaurant.setChefToSetFoodToCook(
-				new ChefSetFoodToCook(restaurant, new Bacon(), "putting bacon on pan", "done putting bacon on pan"))
-				.get();
+		Future<Food> bacon = restaurant.setChefToSetFoodToCook((new Bacon()).getChefToCook(restaurant)).get();
 
 		ScheduledFuture<?> statusChecking = restaurant.setChefToCheckCookingStatus(2000, 2000,
 				new ChefCheckingStatus(bacon, "bacon"));
@@ -40,10 +35,8 @@ public class BLT extends Recipe {
 		ingredients.add(cookedBacon.get());
 		statusChecking.cancel(false);
 
-		Future<Food> lettuce = restaurant.setChefToGetFood(
-				new ChefPrepareFood(new Lettuce(), "cutting lettuce", "done cutting lettuce", 1500, 500));
-		Future<Food> tomato = restaurant.setChefToGetFood(
-				new ChefPrepareFood(new Tomato(), "cutting tomato slices", "done cutting tomato slices", 1500, 500));
+		Future<Food> lettuce = restaurant.setChefToGetFood((new Lettuce()).getChefToPrepare());
+		Future<Food> tomato = restaurant.setChefToGetFood((new Tomato()).getChefToPrepare());
 		ingredients.add(lettuce.get());
 		ingredients.add(tomato.get());
 

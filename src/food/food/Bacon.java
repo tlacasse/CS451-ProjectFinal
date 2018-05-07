@@ -1,6 +1,8 @@
 package food.food;
 
+import food.Restaurant;
 import food.food.desc.Cookable;
+import food.people.ChefSetFoodToCook;
 
 public class Bacon extends AbstractCookable implements Cookable {
 
@@ -9,5 +11,10 @@ public class Bacon extends AbstractCookable implements Cookable {
 	}
 
 	public static final int AVERAGE_COOKING_TIME = (new Bacon()).averageCookingTime();
+
+	@Override
+	public ChefSetFoodToCook getChefToCook(Restaurant restaurant) {
+		return new ChefSetFoodToCook(restaurant, this, "putting bacon on pan", "done putting bacon on pan");
+	}
 
 }
