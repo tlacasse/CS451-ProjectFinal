@@ -26,12 +26,12 @@ public class BLT extends Recipe {
 		ingredients.add(bread.get());
 
 		Future<Food> bacon = restaurant.setChefToSetFoodToCook((new Bacon()).getChefToCook(restaurant)).get();
-
 		ScheduledFuture<?> statusChecking = restaurant.setChefToCheckCookingStatus(2000, 2000,
 				new ChefCheckingStatus(bacon, "bacon"));
 
 		Future<Food> cookedBacon = restaurant.setChefToGetFood(Bacon.AVERAGE_COOKING_TIME,
 				new ChefGetCookedFood(bacon, "cooked bacon"));
+
 		ingredients.add(cookedBacon.get());
 		statusChecking.cancel(false);
 

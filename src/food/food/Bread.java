@@ -7,7 +7,7 @@ public class Bread implements Preparable {
 
 	@Override
 	public ChefPrepareFood getChefToPrepare() {
-		return new ChefPrepareFood(this, "getting bread", "done getting bread", 200, 100);
+		return new ChefPrepareFood(this, "getting bread", "done getting bread", 700, 300);
 	}
 
 }

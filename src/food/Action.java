@@ -14,7 +14,7 @@ public abstract class Action {
 		this.rangeMakeTime = rangeMakeTime;
 	}
 
-	protected final void act() throws InterruptedException {
+	protected void act() throws InterruptedException {
 		Program.print(this, startMessage);
 		// waiting -> making the food, walking to station, gathering food, etc
 		Thread.sleep(minMakeTime + (new Random()).nextInt(rangeMakeTime));

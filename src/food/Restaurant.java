@@ -33,6 +33,7 @@ public class Restaurant implements AutoCloseable {
 	@Override
 	public void close() {
 		for (ExecutorService pool : pools) {
+			System.out.println(pool);
 			pool.shutdown();
 		}
 	}
