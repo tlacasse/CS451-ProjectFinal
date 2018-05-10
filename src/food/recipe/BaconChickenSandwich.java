@@ -54,6 +54,7 @@ public class BaconChickenSandwich extends Recipe {
 				if (second)
 					break;
 				second = true;
+				i = 1 - i;
 			} catch (TimeoutException e) {
 			}
 		}
